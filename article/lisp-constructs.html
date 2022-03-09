@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-03-08 Tue 21:58 -->
+<!-- 2022-03-08 Tue 22:47 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lisp Constructs</title>
@@ -258,11 +258,27 @@ Write cons cells explicitly, as <code>(car . cdr)</code>, if the first item has 
 </div>
 </div>
 
+<div id="outline-container-orgc9d6502" class="outline-2">
+<h2 id="orgc9d6502">Lists</h2>
+<div class="outline-text-2" id="text-orgc9d6502">
+<p>
+Use <code>car</code> to get the first item, <code>cdr</code> to get remaining and <code>nth</code> to get the n<sup>th</sup>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(car '(1 2 3 4)) # =&gt; 1
+(cdr '(1 2 3 4)) # =&gt; (2 3 4)
+(nth 2 '(1 2 3 4)) # =&gt; 3
+</pre>
+</div>
+</div>
+</div>
+
 <div id="outline-container-org32b8b97" class="outline-2">
 <h2 id="org32b8b97">Control statements</h2>
 <div class="outline-text-2" id="text-org32b8b97">
 <p>
-Use <code>when</code> or <code>unless</code> when there are things to do only for one branch of a control statement.
+Use <code>when</code> or <code>unless</code> to do things only for one branch of a control statement.
 </p>
 
 <div class="org-src-container">
@@ -312,6 +328,18 @@ If you need indices, use <code>dotimes</code> instead.
   (body_statements_using index))
 </pre>
 </div>
+
+<p>
+Want both index and item like python's enumerate?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">dolist</span> (pair (loop for i from 0 for var in list collect (cons i var)))
+  (<span style="font-weight: bold;">let</span> ((index (car pair))
+        (item  (cdr pair)))
+    (do_something_with index item)))
+</pre>
+</div>
 </div>
 </div>
 
@@ -327,6 +355,26 @@ Use the <code>interactive</code> function if you need to call the function with 
   <span style="font-style: italic;">"This is a super fun function."</span>
   (<span style="font-weight: bold;">interactive</span>)
   (do_super_fun_things))
+</pre>
+</div>
+
+<p>
+Want the full path to the currently loading el file? or the directory?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(message load-file-name)
+(message (file-name-directory load-file-name))
+</pre>
+</div>
+
+<p>
+Recursively add subdirectories to load-path.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">let</span> (default-directory <span style="font-style: italic;">"root-dir/"</span>)
+  (normal-top-level-add-subdirs-to-load-path))
 </pre>
 </div>
 </div>
