@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-03-08 Tue 19:07 -->
+<!-- 2022-03-08 Tue 16:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mic Maves's Website</title>
+<title>Lisp Constructs</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Michael Maves" />
 <style type="text/css">
@@ -219,66 +219,139 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">Mic Maves's Website</h1>
-<blockquote>
+<h1 class="title">Lisp Constructs</h1>
 <p>
-Thus spake the master programmer: "After three days without programming, life becomes meaningless." &#x2013; The Tao of Programming.
+In this page, we list some commonly used <code>emacs-lisp</code> constructs when customizing the emacs configuration, adding functionality or writing plugins.
 </p>
-</blockquote>
 
-<blockquote>
+<div id="outline-container-org83904a0" class="outline-2">
+<h2 id="org83904a0"><span class="section-number-2">1</span> Variables</h2>
+<div class="outline-text-2" id="text-1">
 <p>
-Thus spake the master emacs user: "After three days without tweaking emacs, life becomes meaningful." &#x2013; Mic Maves.
+Use a backtick instead of a single quote for quoting (<code>`</code>) and prefix all symbols to be evaluated with a comma (<code>,</code>) to evaluate symbols in a quoted list.
 </p>
-</blockquote>
-
-<div id="outline-container-org3813886" class="outline-2">
-<h2 id="org3813886">Articles</h2>
-<div class="outline-text-2" id="text-org3813886">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><a href="article/lisp-constructs.html">Lisp Constructs</a></td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-to-list 'list `(symbol ,evaluated_var))
+</pre>
 </div>
 
-<div id="outline-container-org042a1ed" class="outline-2">
-<h2 id="org042a1ed">Blog</h2>
-<div class="outline-text-2" id="text-org042a1ed">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><a href="blog/2022-03-08-org-roam-daily.html">Org Roam Daily Notes</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-<div id="outline-container-org98ef234" class="outline-2">
-<h2 id="org98ef234">Projects</h2>
-<div class="outline-text-2" id="text-org98ef234">
 <p>
-<a href="https://github.com/codemicmaves/graphite-emacs">Graphite Emacs: Configuration Framework</a>
+Use the <code>let</code> function to initialize variables for a set of statements.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(let ((var1 value1)
+      (var2 value2))
+  (statement_1)
+(statement_2))
+</pre>
+</div>
+
+<p>
+Write cons cells explicitly, as <code>(car . cdr)</code>, if the first item has a special meaning (for readability).
 </p>
 
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq modules '(module . (feature_1 feature_2 feature_3)))
+</pre>
+</div>
+</div>
+</div>
 
-<div id="org3d163ef" class="figure">
-<p><img src="https://github.com/codemicmaves/graphite-emacs/raw/screenshots/screenshots/graphite-emacs-01.png?raw=t" alt="graphite-emacs-01.png?raw=t" />
+<div id="outline-container-orgc5a34fb" class="outline-2">
+<h2 id="orgc5a34fb"><span class="section-number-2">2</span> Control statements</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Use <code>when</code> or <code>unless</code> when there are things to do only for one branch of a control statement.
 </p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(when (condition)
+  (statement_when_true))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(unless (condition)
+  (statement_when_false))
+</pre>
+</div>
+
+<p>
+But, there is always the regular <code>if</code>, if you need.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(if (condition)
+    (statement_when_true)
+  (statement_when_false))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd7d4df6" class="outline-2">
+<h2 id="orgd7d4df6"><span class="section-number-2">3</span> Looping statements</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Use <code>dolist</code> to loop through a list and process something one item at a time
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(dolist (item list)
+  (body_statements_using item))
+</pre>
+</div>
+
+<p>
+If you need indices, use <code>dotimes</code> instead.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(dotimes (index count)
+  (body_statements_using index))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgac17bef" class="outline-2">
+<h2 id="orgac17bef"><span class="section-number-2">4</span> Emacisms</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Use the <code>interactive</code> function if you need to call the function with <code>M-x</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun superfun ()
+  "This is a super fun function."
+  (interactive)
+  (do_super_fun_things))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd149ccf" class="outline-2">
+<h2 id="orgd149ccf"><span class="section-number-2">5</span> Elispisms</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Namespace with a <code>prefix/symbol</code> format.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun my/superfun ()
+  (this_is_my_superfun_not_yours))
+</pre>
+</div>
+
+<p>
+Double dash (<code>--</code>) function names to indicate internal functions to others.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun acme/superfun--in-joke ()
+  (lol_funny))
+</pre>
 </div>
 </div>
 </div>
