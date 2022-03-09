@@ -27,6 +27,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 14px;
 }
 
+.src, .example {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 code {
     font-size: 16px;
 }
@@ -42,8 +47,42 @@ code {
 blockquote {
     font-family: "Averia Libre", monospace;
     font-size: 16px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-ul, ol {
-    padding-left: 1em;
+.timestamp {
+    font-family: "Averia Libre", monospace;
+    font-size: 16px;
+}
+
+ul {
+    padding-left: 1ch;
+}
+
+ol {
+    padding-left: 2ch;
+}
+
+ul > li {
+    list-style-type: "-";
+    padding-inline-start: 1ch;
+}
+
+ol > li {
+    padding-inline-start: 1ch;
+}
+
+a {
+    border-bottom: 1px solid;
+    text-decoration: none;
+}
+
+b {
+    text-shadow: 1px 1px rgba(200,200,200,0.8);
+}
+
+.underline {
+    text-decoration: none;
+    border-bottom: 2px solid rgb(180,180,180);
 }
