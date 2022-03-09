@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kreon:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Averia+Libre:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 body {
     font-family: Kreon, serif;
@@ -17,7 +18,11 @@ body {
     font-family: "Yanone Kaffeesatz", sans-serif;
 }
 
-.src, code {
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.1em;
+}
+
+.src, .example, code {
     font-family: "Syne Mono", monospace;
     font-size: 14px;
 }
@@ -32,4 +37,13 @@ code {
 
 .figure img {
     max-width: 540px;
+}
+
+blockquote {
+    font-family: "Averia Libre", monospace;
+    font-size: 16px;
+}
+
+ul, ol {
+    padding-left: 1em;
 }
