@@ -65,7 +65,7 @@ ol {
 }
 
 ul > li {
-    list-style-type: "-";
+    list-style-type: "⁃";
     padding-inline-start: 1ch;
 }
 
